@@ -1,7 +1,6 @@
 {
   "name": "chatgpt",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "type": "module",
   "scripts": {
@@ -23,5 +22,7 @@
     "nodemailer": "^6.9.13",
     "nodemon": "^2.0.22",
     "openai": "^4.28.0"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }

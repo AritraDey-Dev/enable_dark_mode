@@ -19,17 +19,7 @@ const App = () => {
   const { loading, user } = useSelector((state) => state);
   const [documents, setDocuments] = useState([]);
   const { _id } = useSelector((state) => state.messages);
-  const changeColorMode = (to) => {
-    if (to) {
-      localStorage.setItem("darkMode", true);
-
-      document.body.className = "dark";
-    } else {
-      localStorage.removeItem("darkMode");
-
-      document.body.className = "light";
-    }
-  };
+ 
 
   const getFiles = async () => {
     let res = null;
@@ -48,16 +38,38 @@ const App = () => {
     }
   };
   // Dark & Light Mode
-  useLayoutEffect(() => {
-    let mode = localStorage.getItem("darkMode");
-
-    if (mode) {
-      changeColorMode(true);
+  const changeColorMode = (to) => {
+    if (to) {
+      localStorage.setItem("darkMode", "true");
+      document.body.className = "dark";
     } else {
-      changeColorMode(false);
+      localStorage.removeItem("darkMode");
+      document.body.className = "light";
     }
-  });
+  };
+  
+  const toggleDarkMode = () => {
+    const darkMode = document.body.className === "dark";
+    changeColorMode(!darkMode);
+  };
 
+  
+  
+  const App = () => {
+    useLayoutEffect(() => {
+      const mode = localStorage.getItem("darkMode");
+      changeColorMode(mode === "true");
+    }, []);
+  
+    return (
+      <div>
+        <h1>Welcome to the App</h1>
+        <button onClick={toggleDarkMode} className="button">Toggle Dark Mode</button>
+      </div>
+    );
+  };
+  
+  
   // Offline
   useEffect(() => {
     window.addEventListener("online", (e) => {
